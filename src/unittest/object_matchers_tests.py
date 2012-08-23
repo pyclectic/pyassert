@@ -1,6 +1,6 @@
 import unittest
 
-from pyassert.matchers import EqualsMatcher
+from pyassert.object_matchers import EqualsMatcher
 
 class EqualsMatcherTest (unittest.TestCase):
     def test_matches_should_return_true_when_values_are_equal (self):

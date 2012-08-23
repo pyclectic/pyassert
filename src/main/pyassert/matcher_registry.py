@@ -8,6 +8,8 @@ __all__ = [
 ]
 
 class Matcher (object):
+    def accepts (self, actual):
+        return True
 
     def matches (self, actual):
         pass
@@ -31,15 +33,17 @@ class MatcherRegistry (object):
         return MatcherRegistry._INSTANCE
     
     def __init__(self):
-        self.matchers = {}
+        self._matchers = {}
     
-    def register_matcher (self, name, matcher):
-        self.matchers[name] = matcher
+    def register_matcher (self, name, matcher_class):
+        if name not in self._matchers:
+            self._matchers[name] = []
+        self._matchers[name].append(matcher_class)
         
-    def resolve_matcher (self, name):
-        if name not in self.matchers:
+    def resolve_matchers (self, name):
+        if name not in self._matchers:
             raise NoSuchMatcherException(name)
-        return self.matchers[name]
+        return self._matchers[name]
 
 
 def register_matcher (name):
