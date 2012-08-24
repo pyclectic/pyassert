@@ -11,12 +11,30 @@ default_task = ["analyze", "publish"]
 
 version = "0.1.1"
 summary = "Rich assertions library for Python"
+description = """
+pyassert is an assertion library for the Python programming language. pyassert aims to provide assertions with provide
+
+* rich functionality: common assertions should be expressed easily
+* good readability: assertions should be easy to read and easy to understand to enhance the overall understandability of the test
+* independent of the test framework: pyassert assertions work with every Python test environment.
+"""
 authors = (Author("Alexander Metzner", "halimath.wilanthaou@gmail.com"),)
+url = "https://github.com/halimath/pyassert"
+license = "Apache Software License"
 
 @init
 def init (project):
     project.set_property("dir_source_main_python", "src/main")
     project.set_property("dir_source_unittest_python", "src/unittest")
-    project.set_property("distutils_commands", ("sdist", "bdist_dumb"))
     project.set_property("pychecker_break_build", True)
     project.set_property("pychecker_break_build_threshold", 1)
+
+    project.get_property("distutils_commands").append("bdist_egg")
+    project.set_property("distutils_classifiers", [
+        'Development Status :: 4 - Beta',
+        'Environment :: Other Environment',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Programming Language :: Python',
+        'Topic :: Software Development :: Quality Assurance',
+        'Topic :: Software Development :: Testing'])
