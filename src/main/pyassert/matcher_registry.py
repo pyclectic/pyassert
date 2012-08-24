@@ -9,12 +9,15 @@ __all__ = [
 
 class Matcher (object):
     def accepts (self, actual):
+        """Returns True if the given actual value is accepted by this matcher."""
         return True
 
     def matches (self, actual):
+        """Returns True if the given actual value matches this matcher. Returns False otherwise"""
         pass
 
     def describe (self, actual):
+        """Returns a description which is used in case the actual value did not match this matcher's expectation."""
         pass
 
 
