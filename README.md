@@ -13,7 +13,9 @@ Assertions are used in automated tests to verify that a given piece of code beha
 
 ## How to install it?
 
-* **TODO**: Write installation instructions
+pyassert is available via the [Cheeseshop](http://pypi.python.org/pypi/pyassert/) so you can use easy_install or pip:
+
+    $ pip install pyassert
 
 ## How to use it?
 

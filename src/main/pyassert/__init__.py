@@ -8,4 +8,4 @@ from .list_matchers import *
 
 __author__ = "Alexander Metzner"
 
-__version__ = '0.1.1'
+__version__ = '0.2.1'
