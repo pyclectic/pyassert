@@ -19,12 +19,43 @@ pyassert is available via the [Cheeseshop](http://pypi.python.org/pypi/pyassert/
 
 ## How to use it?
 
+The most important function pyassert provides is **assert_that**. This function is used to start an assertion. You pass
+in the actual value and as a result you get an AssertionHandler (although you will never care, most of the time).
+
+The AssertionHandler provides several assertion predicates. These are functions you can use to verify a given state
+of the actual value.
+
+Some examples:
+
 ```python
 from pyassert import *
 
 assert_that('spam and eggs').ends_with('eggs')
 assert_that(['spam', 'and', 'eggs']).contains(any_of('spam', 'ham'))
 ```
+
+The general structure is
+
+   assert_that(<actual value).<matcher name>([<expected values>])
+
+Every assertion will return None if the actual value matches the expectations or raise an AssertionError with a
+readable message in case the expectations are not met.
+
+###Matchers
+
+The following matcher are provided by pyassert.
+
+#### Common Matchers
+* equals
+
+#### String Matchers
+* contains
+* matches
+* ends_with
+* starts_with
+
+#### List/ Tuple Matchers
+* contains
 
 ## How to extend it?
 

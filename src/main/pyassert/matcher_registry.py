@@ -48,6 +48,16 @@ class MatcherRegistry (object):
             raise NoSuchMatcherException(name)
         return self._matchers[name]
 
+    def list_matchers (self):
+        result = []
+        for matcher in self._matchers:
+            matcher_doc_strings = []
+            for clazz in self._matchers[matcher]:
+                matcher_doc_strings.append(clazz.__doc__)
+            result.append((matcher, matcher_doc_strings))
+
+        return result
+
 
 def register_matcher (name):
 
