@@ -27,14 +27,14 @@ class ObjectMatchersIntegrationTest (unittest.TestCase):
         except AssertionError as e:
             self.assertEquals("Assertion failed: Actual 'spam' does not equal expected 'eggs'", str(e))
 
-    def test_that_is_matches_identical_object (self):
-        assert_that(True).is_(True)
+    def test_that_is_identical_to_matches_identical_object (self):
+        assert_that(True).is_identical_to(True)
 
-    def test_that_is_does_not_match_no_identical_object (self):
-        self.assertRaises(AssertionError, assert_that(True).is_, False)
+    def test_that_is_identical_to_does_not_match_no_identical_object (self):
+        self.assertRaises(AssertionError, assert_that(True).is_identical_to, False)
 
     def test_that_not_negates_match (self):
-        assert_that(False).is_(not True)
+        assert_that(False).is_identical_to(not True)
 
 
 class StringMatchersIntegrationTest (unittest.TestCase):

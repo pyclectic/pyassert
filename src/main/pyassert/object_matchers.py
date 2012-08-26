@@ -15,7 +15,7 @@ class EqualsMatcher (Matcher):
                                                              self.expected)
 
 
-@register_matcher("is_")
+@register_matcher("is_identical_to")
 class IsMatcher (Matcher):
     def __init__ (self, expected):
         self.expected = expected

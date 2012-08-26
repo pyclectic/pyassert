@@ -6,5 +6,5 @@ user
 .pydevproject
 .idea
 *.iml
-ve
+ve*
 

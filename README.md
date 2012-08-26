@@ -36,7 +36,7 @@ assert_that(['spam', 'and', 'eggs']).contains(any_of('spam', 'ham'))
 
 The general structure is
 
-   assert_that(<actual value).<matcher name>([<expected values>])
+   assert_that(actual_value).matcher_name(expected_values)
 
 Every assertion will return None if the actual value matches the expectations or raise an AssertionError with a
 readable message in case the expectations are not met.
@@ -47,6 +47,7 @@ The following matcher are provided by pyassert.
 
 #### Common Matchers
 * equals
+* is_identical_to
 
 #### String Matchers
 * contains
