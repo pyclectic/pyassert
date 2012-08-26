@@ -35,6 +35,9 @@ class ObjectMatchersIntegrationTest (unittest.TestCase):
 
     def test_that_not_negates_match (self):
         assert_that(False).is_identical_to(not True)
+        
+    def test_is_of_type (self):
+        assert_that(7).is_a(int)
 
 
 class StringMatchersIntegrationTest (unittest.TestCase):

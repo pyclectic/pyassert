@@ -28,6 +28,9 @@ def init (project):
     project.set_property("dir_source_unittest_python", "src/unittest")
     project.set_property("pychecker_break_build", True)
     project.set_property("pychecker_break_build_threshold", 1)
+    
+    project.set_property("coverage_threshold_warn", 90)
+    project.set_property("coverage_break_build", True)
 
     project.get_property("distutils_commands").append("bdist_egg")
     project.set_property("distutils_classifiers", [

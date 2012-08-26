@@ -4,12 +4,21 @@ from .matcher_registry import Matcher, register_matcher
 
 __author__ = 'Alexander Metzner'
 
+"""
+Provides matcher implementations that deal with lists or tuples.
+"""
+
 class ListOrTupleMatcher (Matcher):
+    """ Base class for matchers accepting lists or tuples. """
     def accepts(self, actual):
         return isinstance(actual, types.ListType) or \
             isinstance(actual, types.TupleType)
 
 class AnyOfContainsMatcher (ListOrTupleMatcher):
+    """ 
+    Supplementary matcher that matches when any of the expected values
+    is contained in the actual collection.
+    """ 
     def __init__ (self, expected):
         self.expected = expected
 
@@ -25,10 +34,15 @@ class AnyOfContainsMatcher (ListOrTupleMatcher):
 
 
 def any_of (*expected_values):
+    """ Convenient factory function for AnyOfContainsMatcher. """
     return AnyOfContainsMatcher(expected_values)
 
 
 class AllContainsMatcher (ListOrTupleMatcher):
+    """ 
+    Supplementary matcher that matches when all of the expected values
+    are contained in the actual collection.
+    """ 
     def __init__ (self, expected):
         self.expected = expected
 
@@ -42,13 +56,25 @@ class AllContainsMatcher (ListOrTupleMatcher):
         return "'%s' does not contain all elements of '%s'" % (actual,
                                                                ", ".join(self.expected))
 
-
 def all (*expected_values):
+    """ Convenient factory funtion for AllContainsMatcher. """
     return AllContainsMatcher(expected_values)
 
 
 @register_matcher("contains")
 class ContainsMatcher (ListOrTupleMatcher):
+    """ 
+    Matcher that verifies that certain elements are contained in the given
+    collection.
+    
+    Examples:
+    collection = [...]
+
+    assert_that(collection).contains('spam')
+    assert_that(collection).contains(any_of('spam', 'eggs'))
+    assert_that(collection).contains(all('spam', 'eggs'))
+    """
+    
     def __init__ (self, expected):
         self.expected = expected
 

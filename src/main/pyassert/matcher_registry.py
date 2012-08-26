@@ -1,10 +1,13 @@
+from __future__ import print_function
+
 __author__ = "Alexander Metzner"
 
 __all__ = [
     "Matcher",
     "MatcherRegistry",
     "NoSuchMatcherException",
-    "register_matcher"
+    "register_matcher",
+    "document_matchers"
 ]
 
 class Matcher (object):
@@ -14,11 +17,11 @@ class Matcher (object):
 
     def matches (self, actual):
         """Returns True if the given actual value matches this matcher. Returns False otherwise"""
-        pass
+        return False
 
     def describe (self, actual):
         """Returns a description which is used in case the actual value did not match this matcher's expectation."""
-        pass
+        return "A matcher did not match the actual value."
 
 
 class NoSuchMatcherException (Exception):
@@ -60,8 +63,21 @@ class MatcherRegistry (object):
 
 
 def register_matcher (name):
-
     def do_register (clazz):
         MatcherRegistry.instance().register_matcher(name, clazz)
         return clazz
     return do_register
+
+
+def document_matchers (out=None):
+    matchers = MatcherRegistry.instance().list_matchers()
+    result = ""
+    for matcher in matchers:
+        result += "%s:\n" % matcher[0]
+        for doc_string in matcher[1]:
+            result += "\t%s\n" % (doc_string if doc_string else "n/a")
+    
+    if out is None:
+        print(result)
+    else:
+        out.write(result)

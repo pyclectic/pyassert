@@ -10,6 +10,7 @@ __all__ = [
 ]
 
 class StringMatcher (Matcher):
+    "Base class for matchers accepting string values."
     def __init__ (self, expected):
         self._expected = expected
 
@@ -19,6 +20,7 @@ class StringMatcher (Matcher):
 
 @register_matcher("contains")
 class ContainsMatcher (StringMatcher):
+    "Tests whether the actual string contains the expected string."
     def matches (self, actual):
         return self._expected in actual
 
@@ -28,6 +30,7 @@ class ContainsMatcher (StringMatcher):
 
 @register_matcher("matches")
 class MatchesMatcher (StringMatcher):
+    "Tests whether the actual string matches the expected regular expression."
     def __init__ (self, expected):
         StringMatcher.__init__(self, expected)
         self._pattern = re.compile(expected)
@@ -41,6 +44,7 @@ class MatchesMatcher (StringMatcher):
 
 @register_matcher("starts_with")
 class StartsWithMatcher (StringMatcher):
+    "Tests whether the actual string starts with the expected string."
     def matches (self, actual):
         return actual.startswith(self._expected)
 
@@ -50,6 +54,7 @@ class StartsWithMatcher (StringMatcher):
 
 @register_matcher("ends_with")
 class EndsWithMatcher (StringMatcher):
+    "Tests whether the actual string ends with the expected string."
     def matches (self, actual):
         return actual.endswith(self._expected)
 
