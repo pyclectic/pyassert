@@ -15,6 +15,14 @@ class BasicIntegrationTest (unittest.TestCase):
             assert_that(AnyObject()).contains("something")
         self.assertRaises(AssertionError, callback)
 
+    def test_should_chain_matcher (self):
+        assert_that("spam and eggs").contains("and").and_ends_with("eggs")
+
+    def test_should_not_allow_and_matcher_as_first_matcher (self):
+        def callback ():
+            assert_that("spam and eggs").and_contains("and")
+        self.assertRaises(InvalidUsageException, callback)
+
 
 class ObjectMatchersIntegrationTest (unittest.TestCase):
     def test_that_equal_matcher_matches_equal_values (self):
