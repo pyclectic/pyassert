@@ -9,10 +9,12 @@ Provides matcher implementations that deal with lists or tuples.
 """
 
 class ListOrTupleMatcher (Matcher):
+    LIST_CLASS = [].__class__
+    TUPLE_CLASS = (1,).__class__
+
     """ Base class for matchers accepting lists or tuples. """
     def accepts(self, actual):
-        return isinstance(actual, types.ListType) or \
-            isinstance(actual, types.TupleType)
+        return actual.__class__ in [ListOrTupleMatcher.LIST_CLASS, ListOrTupleMatcher.TUPLE_CLASS]
 
 class AnyOfContainsMatcher (ListOrTupleMatcher):
     """ 

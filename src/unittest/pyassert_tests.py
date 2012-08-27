@@ -39,7 +39,11 @@ class ObjectMatchersIntegrationTest (unittest.TestCase):
         assert_that(True).is_identical_to(True)
 
     def test_that_is_identical_to_does_not_match_no_identical_object (self):
-        self.assertRaises(AssertionError, assert_that(True).is_identical_to, False)
+        try:
+            assert_that(True).is_identical_to(False)
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
     def test_that_not_negates_match (self):
         assert_that(False).is_identical_to(not True)
@@ -53,25 +57,41 @@ class StringMatchersIntegrationTest (unittest.TestCase):
         assert_that("spam").contains("pa")
 
     def test_contains_fail (self):
-        self.assertRaises(AssertionError, assert_that("spam").contains, "egg")
+        try:
+            assert_that("spam").contains("egg")
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
     def test_matches (self):
         assert_that("spam").matches(".*pa.*")
 
     def test_matches_fail (self):
-        self.assertRaises(AssertionError, assert_that("spam").matches, "egg")
+        try:
+            assert_that("spam").matches("egg")
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
     def test_starts_with (self):
         assert_that("spam").starts_with("sp")
 
     def test_starts_with_fail (self):
-        self.assertRaises(AssertionError, assert_that("spam").starts_with, "egg")
+        try:
+            assert_that("spam").starts_with("egg")
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
     def test_ends_with (self):
         assert_that("spam").ends_with("am")
 
     def test_ends_with_fail (self):
-        self.assertRaises(AssertionError, assert_that("spam").ends_with, "egg")
+        try:
+            assert_that("spam").ends_with("egg")
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
 
 class ListMatchersIntegrationTest (unittest.TestCase):
@@ -79,16 +99,28 @@ class ListMatchersIntegrationTest (unittest.TestCase):
         assert_that(["a", "b", "c"]).contains("a")
 
     def test_that_contains_matcher_does_not_match_single_element_not_in_list (self):
-        self.assertRaises(AssertionError, assert_that(["a", "b", "c"]).contains, "d")
+        try:
+            assert_that(["a", "b", "c"]).contains("d")
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
     def test_that_contains_matcher_matches_when_any_of_is_used_and_one_element_matches (self):
         assert_that(["a", "b", "c"]).contains(any_of("a", "d"))
 
     def test_that_contains_matcher_does_not_match_when_any_of_is_used_and_no_element_matches (self):
-        self.assertRaises(AssertionError, assert_that(["a", "b", "c"]).contains, any_of("d", "e"))
+        try:
+            assert_that(["a", "b", "c"]).contains(any_of("d", "e"))
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
     def test_that_contains_matcher_does_not_match_when_all_is_used_and_not_all_elements_match (self):
-        self.assertRaises(AssertionError, assert_that(["a", "b", "c"]).contains, all("a", "d"))
+        try:
+            assert_that(["a", "b", "c"]).contains(all("a", "d"))
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
     def test_that_contains_matcher_matches_when_all_is_used_and_all_elements_match (self):
         assert_that(["a", "b", "c"]).contains(all("a", "b"))

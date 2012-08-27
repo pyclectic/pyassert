@@ -9,13 +9,19 @@ __all__ = [
     "ContainsMatcher"
 ]
 
+# Python 3 compatibility
+try:
+    unicode
+except NameError:
+    basestring = unicode = str
+
 class StringMatcher (Matcher):
     "Base class for matchers accepting string values."
     def __init__ (self, expected):
         self._expected = expected
 
     def accepts(self, actual):
-        return isinstance(actual, types.StringType)
+        return isinstance(actual, basestring)
 
 
 @register_matcher("contains")
