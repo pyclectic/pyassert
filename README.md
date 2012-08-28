@@ -97,3 +97,8 @@ assert_that(actual).matches_my_matcher(...)
 ```
 
 All arguments that are passed to the matches_my_matcher function call are passed to the constructor of MyMatcher that is used by this assertion.
+
+## Release Notes
+### Version 0.2.1 released 2012-08-28
+* Added a is_a matcher that assert that actual values are of an expected type
+* pyassert is now compatible with Python 3 (see [Travis Build](http://travis-ci.org/#!/halimath/pyassert))
