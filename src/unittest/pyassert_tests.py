@@ -57,6 +57,9 @@ class ObjectMatchersIntegrationTest (unittest.TestCase):
     def test_is_false (self):
         assert_that(None).is_false()
 
+    def test_is_none (self):
+        assert_that(None).is_none()
+
 
 class StringMatchersIntegrationTest (unittest.TestCase):
     def test_contains (self):

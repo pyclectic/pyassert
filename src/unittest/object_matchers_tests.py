@@ -1,6 +1,6 @@
 import unittest
 
-from pyassert.object_matchers import EqualsMatcher, IsTypeMatcher, IsTrueMatcher, IsFalseMatcher
+from pyassert.object_matchers import EqualsMatcher, IsTypeMatcher, IsTrueMatcher, IsFalseMatcher, NoneMatcher
 
 class EqualsMatcherTest (unittest.TestCase):
     def test_matches_should_return_true_when_values_are_equal (self):
@@ -73,3 +73,10 @@ class IsFalseMatcherTest (unittest.TestCase):
 
     def test_should_return_true_when_matching_non_empty_string (self):
         self.assertTrue(IsFalseMatcher().matches(None))
+
+class IsNoneMatcherTest (unittest.TestCase):
+    def test_should_return_true_when_matching_None (self):
+        self.assertTrue(NoneMatcher().matches(None))
+
+    def test_should_return_false_when_matching_string (self):
+        self.assertFalse(NoneMatcher().matches(""))

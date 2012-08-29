@@ -64,3 +64,12 @@ class IsFalseMatcher (Matcher):
 
     def describe(self, actual):
         return "Expected '%s' to be false" % actual
+
+
+@register_matcher("is_none")
+class NoneMatcher (Matcher):
+    def matches (self, actual):
+        return actual is None
+
+    def describe(self, actual):
+        return "Expected '%s' to be none" % actual
