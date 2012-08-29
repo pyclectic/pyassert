@@ -51,6 +51,12 @@ class ObjectMatchersIntegrationTest (unittest.TestCase):
     def test_is_of_type (self):
         assert_that(7).is_a(int)
 
+    def test_is_true (self):
+        assert_that(4).is_true()
+
+    def test_is_false (self):
+        assert_that(None).is_false()
+
 
 class StringMatchersIntegrationTest (unittest.TestCase):
     def test_contains (self):

@@ -46,3 +46,21 @@ class IsTypeMatcher (BaseMatcher):
         return "'%s' of type %s is not of expected type %s" % (actual, 
                                                                actual.__class__,
                                                                self._expected)
+
+
+@register_matcher("is_true")
+class IsTrueMatcher (Matcher):
+    def matches (self, actual):
+        return bool(actual)
+
+    def describe(self, actual):
+        return "Expected '%s' to be true" % actual
+
+
+@register_matcher("is_false")
+class IsFalseMatcher (Matcher):
+    def matches (self, actual):
+        return not bool(actual)
+
+    def describe(self, actual):
+        return "Expected '%s' to be false" % actual

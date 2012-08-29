@@ -1,6 +1,6 @@
 import unittest
 
-from pyassert.object_matchers import EqualsMatcher, IsTypeMatcher
+from pyassert.object_matchers import EqualsMatcher, IsTypeMatcher, IsTrueMatcher, IsFalseMatcher
 
 class EqualsMatcherTest (unittest.TestCase):
     def test_matches_should_return_true_when_values_are_equal (self):
@@ -47,3 +47,29 @@ class IsTypeMatcherTest (unittest.TestCase):
     def test_describe_should_render_description (self):
         matcher = IsTypeMatcher(int)
         self.assertTrue("eggs" in matcher.describe("eggs"))
+
+class IsTrueMatcherTest (unittest.TestCase):
+    def test_should_return_true_when_matching_true (self):
+        self.assertTrue(IsTrueMatcher().matches(True))
+
+    def test_should_return_false_when_matching_false (self):
+        self.assertFalse(IsTrueMatcher().matches(False))
+
+    def test_should_return_true_when_matching_non_empty_string (self):
+        self.assertTrue(IsTrueMatcher().matches("spam"))
+
+    def test_should_return_false_when_matching_non_empty_string (self):
+        self.assertFalse(IsTrueMatcher().matches(None))
+
+class IsFalseMatcherTest (unittest.TestCase):
+    def test_should_return_false_when_matching_true (self):
+        self.assertFalse(IsFalseMatcher().matches(True))
+
+    def test_should_return_true_when_matching_false (self):
+        self.assertTrue(IsFalseMatcher().matches(False))
+
+    def test_should_return_false_when_matching_non_empty_string (self):
+        self.assertFalse(IsFalseMatcher().matches("spam"))
+
+    def test_should_return_true_when_matching_non_empty_string (self):
+        self.assertTrue(IsFalseMatcher().matches(None))
