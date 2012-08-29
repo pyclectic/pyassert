@@ -4,5 +4,5 @@ python:
   - "2.7"
   - "3.2"
 before_script: sudo apt-get install pychecker
-install: pip install -r requirements.txt --use-mirrors
-script: pyb
+install: pip install pybuilder
+script: pyb clean install_dependencies publish

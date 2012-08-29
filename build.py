@@ -5,6 +5,8 @@ use_plugin("python.unittest")
 use_plugin("python.coverage")
 use_plugin("python.pychecker")
 use_plugin("python.distutils")
+
+use_plugin("python.install_dependencies")
 use_plugin("python.pydev")
 
 default_task = ["analyze", "publish"]
@@ -24,6 +26,8 @@ license = "Apache Software License"
 
 @init
 def init (project):
+    project.build_depends_on("coverage")
+
     project.set_property("dir_source_main_python", "src/main")
     project.set_property("dir_source_unittest_python", "src/unittest")
     project.set_property("pychecker_break_build", True)
