@@ -11,7 +11,7 @@ use_plugin("python.pydev")
 
 default_task = ["analyze", "publish"]
 
-version = "0.2.2"
+version = "0.2.3"
 summary = "Rich assertions library for Python"
 description = """
 pyassert is an assertion library for the Python programming language. pyassert aims to provide assertions with provide
