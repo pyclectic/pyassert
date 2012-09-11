@@ -17,15 +17,18 @@ except NameError:
 
 class StringMatcher (Matcher):
     "Base class for matchers accepting string values."
-    def __init__ (self, expected):
-        self._expected = expected
-
     def accepts(self, actual):
         return isinstance(actual, basestring)
 
 
+class StringMatcherWithArgument (StringMatcher):
+    "Base class for matchers accepting string values and requiring additional expected parameter"
+    def __init__ (self, expected):
+        self._expected = expected
+
+
 @register_matcher("contains")
-class ContainsMatcher (StringMatcher):
+class ContainsMatcher (StringMatcherWithArgument):
     "Tests whether the actual string contains the expected string."
     def matches (self, actual):
         return self._expected in actual
@@ -35,10 +38,10 @@ class ContainsMatcher (StringMatcher):
 
 
 @register_matcher("matches")
-class MatchesMatcher (StringMatcher):
+class MatchesMatcher (StringMatcherWithArgument):
     "Tests whether the actual string matches the expected regular expression."
     def __init__ (self, expected):
-        StringMatcher.__init__(self, expected)
+        StringMatcherWithArgument.__init__(self, expected)
         self._pattern = re.compile(expected)
 
     def matches (self, actual):
@@ -49,7 +52,7 @@ class MatchesMatcher (StringMatcher):
 
 
 @register_matcher("starts_with")
-class StartsWithMatcher (StringMatcher):
+class StartsWithMatcher (StringMatcherWithArgument):
     "Tests whether the actual string starts with the expected string."
     def matches (self, actual):
         return actual.startswith(self._expected)
@@ -59,7 +62,7 @@ class StartsWithMatcher (StringMatcher):
 
 
 @register_matcher("ends_with")
-class EndsWithMatcher (StringMatcher):
+class EndsWithMatcher (StringMatcherWithArgument):
     "Tests whether the actual string ends with the expected string."
     def matches (self, actual):
         return actual.endswith(self._expected)

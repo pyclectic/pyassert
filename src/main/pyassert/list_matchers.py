@@ -1,6 +1,7 @@
 import types
 
 from .matcher_registry import Matcher, register_matcher
+from .string_matchers import StringMatcher
 
 __author__ = 'Alexander Metzner'
 
@@ -89,3 +90,27 @@ class ContainsMatcher (ListOrTupleMatcher):
         if isinstance(self.expected, Matcher):
             return self.expected.describe(actual)
         return "'%s' does not contain '%s'" % (actual, self.expected)
+
+
+@register_matcher("is_empty")
+class IsEmptyMatcher (ListOrTupleMatcher, StringMatcher):
+    def accepts(self, actual):
+        return ListOrTupleMatcher.accepts(self, actual) or StringMatcher.accepts(self, actual)
+
+    def matches (self, actual):
+        return len(actual) == 0
+
+    def describe (self, actual):
+        return "'%s' is not empty" % actual
+
+
+@register_matcher("is_not_empty")
+class IsNotEmptyMatcher (ListOrTupleMatcher, StringMatcher):
+    def accepts(self, actual):
+        return ListOrTupleMatcher.accepts(self, actual) or StringMatcher.accepts(self, actual)
+
+    def matches (self, actual):
+        return len(actual) != 0
+
+    def describe (self, actual):
+        return "'%s' is empty" % actual

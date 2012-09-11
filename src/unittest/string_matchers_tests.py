@@ -6,10 +6,10 @@ from pyassert.string_matchers import StringMatcher, ContainsMatcher, MatchesMatc
 
 class StringMatcherTests (unittest.TestCase):
     def test_should_accept_string (self):
-        self.assertTrue(StringMatcher('spam').accepts('eggs'))
+        self.assertTrue(StringMatcher().accepts('eggs'))
 
     def test_should_not_accept_list_of_characters (self):
-        self.assertFalse(StringMatcher('spam').accepts(['e', 'g', 'g', 's']))
+        self.assertFalse(StringMatcher().accepts(['e', 'g', 'g', 's']))
 
 
 class ContainsMatcherTests (unittest.TestCase):

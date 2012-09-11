@@ -102,6 +102,26 @@ class StringMatchersIntegrationTest (unittest.TestCase):
         except (AssertionError) as e:
             pass
 
+    def test_that_is_empty_matcher_matches_empty_string (self):
+        assert_that('').is_empty()
+
+    def test_that_is_empty_matcher_does_not_match_non_empty_string (self):
+        try:
+            assert_that('spam').is_empty()
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
+
+
+    def test_that_is_not_empty_matcher_matches_non_empty_string (self):
+        assert_that('spam').is_not_empty()
+
+    def test_that_is_not_empty_matcher_does_not_match_empty_string (self):
+        try:
+            assert_that('').is_not_empty()
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
 
 class ListMatchersIntegrationTest (unittest.TestCase):
     def test_that_contains_matcher_matches_single_element_in_list (self):
@@ -133,3 +153,23 @@ class ListMatchersIntegrationTest (unittest.TestCase):
 
     def test_that_contains_matcher_matches_when_all_is_used_and_all_elements_match (self):
         assert_that(["a", "b", "c"]).contains(all("a", "b"))
+
+    def test_that_is_empty_matcher_matches_empty_list (self):
+        assert_that([]).is_empty()
+
+    def test_that_is_empty_matcher_does_not_match_non_empty_list (self):
+        try:
+            assert_that(['spam']).is_empty()
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
+
+    def test_that_is_not_empty_matcher_matches_non_empty_list (self):
+        assert_that(['spam']).is_not_empty()
+
+    def test_that_is_not_empty_matcher_does_not_match_empty_list (self):
+        try:
+            assert_that([]).is_not_empty()
+            self.fail("AssertionError expected")
+        except (AssertionError) as e:
+            pass
