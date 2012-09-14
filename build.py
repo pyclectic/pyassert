@@ -21,7 +21,7 @@ pyassert is an assertion library for the Python programming language. pyassert a
 * independent of the test framework: pyassert assertions work with every Python test environment.
 """
 authors = (Author("Alexander Metzner", "halimath.wilanthaou@gmail.com"),)
-url = "https://github.com/halimath/pyassert"
+url = "https://github.com/pyclectic/pyassert"
 license = "Apache Software License"
 
 @init
