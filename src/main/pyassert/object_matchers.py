@@ -9,6 +9,7 @@ class BaseMatcher (Matcher):
 
 
 @register_matcher("equals")
+@register_matcher("is_equal_to")
 class EqualsMatcher (BaseMatcher):
     "Matcher that tests whether two object are equal, i.e. actual == expected"
     def matches (self, actual):
@@ -73,3 +74,14 @@ class NoneMatcher (Matcher):
 
     def describe(self, actual):
         return "Expected '%s' to be none" % actual
+
+
+@register_matcher("is_instance_of")
+class InstanceOfMatcher (BaseMatcher):
+    def matches (self, actual):
+        return isinstance(actual, self._expected)
+
+    def describe(self, actual):
+        return "Actual '%s' is not an instance of %s" % (actual, self._expected.__name__)
+
+

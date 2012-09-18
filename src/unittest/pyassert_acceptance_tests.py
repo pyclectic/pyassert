@@ -2,7 +2,7 @@ import unittest
 
 from pyassert import *
 
-class BasicIntegrationTest (unittest.TestCase):
+class BasicAcceptanceTest (unittest.TestCase):
     def test_assert_that_should_raise_exception_when_no_matcher_with_method_name_is_found (self):
         def callback ():
             assert_that("spam").matcher_not_found("spam")
@@ -24,13 +24,23 @@ class BasicIntegrationTest (unittest.TestCase):
         self.assertRaises(InvalidUsageException, callback)
 
 
-class ObjectMatchersIntegrationTest (unittest.TestCase):
+class ObjectMatchersAcceptanceTest (unittest.TestCase):
     def test_that_equal_matcher_matches_equal_values (self):
         assert_that("spam").equals("spam")
 
     def test_that_equal_matcher_does_not_match_inequal_values (self):
         try:
             assert_that("spam").equals("eggs")
+            self.fail("AssertionError expected")
+        except AssertionError as e:
+            self.assertEquals("Assertion failed: Actual 'spam' does not equal expected 'eggs'", str(e))
+
+    def test_that_is_equal_to_matcher_matches_equal_values (self):
+        assert_that("spam").is_equal_to("spam")
+
+    def test_that_is_equal_to_matcher_does_not_match_inequal_values (self):
+        try:
+            assert_that("spam").is_equal_to("eggs")
             self.fail("AssertionError expected")
         except AssertionError as e:
             self.assertEquals("Assertion failed: Actual 'spam' does not equal expected 'eggs'", str(e))
@@ -61,7 +71,7 @@ class ObjectMatchersIntegrationTest (unittest.TestCase):
         assert_that(None).is_none()
 
 
-class StringMatchersIntegrationTest (unittest.TestCase):
+class StringMatchersAcceptanceTest (unittest.TestCase):
     def test_contains (self):
         assert_that("spam").contains("pa")
 
@@ -123,7 +133,7 @@ class StringMatchersIntegrationTest (unittest.TestCase):
         except (AssertionError) as e:
             pass
 
-class ListMatchersIntegrationTest (unittest.TestCase):
+class ListMatchersAcceptanceTest (unittest.TestCase):
     def test_that_contains_matcher_matches_single_element_in_list (self):
         assert_that(["a", "b", "c"]).contains("a")
 
@@ -172,4 +182,16 @@ class ListMatchersIntegrationTest (unittest.TestCase):
             assert_that([]).is_not_empty()
             self.fail("AssertionError expected")
         except (AssertionError) as e:
+            pass
+
+
+class IsInstanceOfTest (unittest.TestCase):
+    def test_success (self):
+        assert_that([1, 2, 3]).is_instance_of(list)
+
+    def test_failure (self):
+        try:
+            assert_that([1, 2, 3]).is_instance_of(dict)
+            self.fail("AssertionError expected")
+        except AssertionError as e:
             pass
