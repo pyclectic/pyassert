@@ -6,6 +6,6 @@ from .string_matchers import *
 from .object_matchers import *
 from .list_matchers import *
 
-__author__ = "Alexander Metzner"
+__author__ = "Alexander Metzner, Michael Gruber"
 
-__version__ = '0.2.2'
+__version__ = "${version}"

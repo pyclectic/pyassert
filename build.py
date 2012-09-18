@@ -1,5 +1,7 @@
 from pythonbuilder.core import init, use_plugin, Author
 
+use_plugin("filter_resources")
+
 use_plugin("python.core")
 use_plugin("python.unittest")
 use_plugin("python.coverage")
@@ -20,13 +22,16 @@ pyassert is an assertion library for the Python programming language. pyassert a
 * good readability: assertions should be easy to read and easy to understand to enhance the overall understandability of the test
 * independent of the test framework: pyassert assertions work with every Python test environment.
 """
-authors = (Author("Alexander Metzner", "halimath.wilanthaou@gmail.com"),)
+authors = (Author("Alexander Metzner", "halimath.wilanthaou@gmail.com"),
+           Author("Michael Gruber", "aelgru@gmail.com"))
 url = "https://github.com/pyclectic/pyassert"
 license = "Apache Software License"
 
 @init
 def init (project):
     project.build_depends_on("coverage")
+    
+    project.get_property("filter_resources_glob").append("**/pyassert/__init__.py")
 
     project.set_property("dir_source_main_python", "src/main")
     project.set_property("dir_source_unittest_python", "src/unittest")
@@ -38,10 +43,10 @@ def init (project):
 
     project.get_property("distutils_commands").append("bdist_egg")
     project.set_property("distutils_classifiers", [
-        'Development Status :: 4 - Beta',
-        'Environment :: Other Environment',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: Apache Software License',
-        'Programming Language :: Python',
-        'Topic :: Software Development :: Quality Assurance',
-        'Topic :: Software Development :: Testing'])
+        "Development Status :: 4 - Beta",
+        "Environment :: Other Environment",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: Apache Software License",
+        "Programming Language :: Python",
+        "Topic :: Software Development :: Quality Assurance",
+        "Topic :: Software Development :: Testing"])
