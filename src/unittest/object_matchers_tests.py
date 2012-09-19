@@ -1,6 +1,24 @@
 import unittest
 
-from pyassert.object_matchers import EqualsMatcher, IsTypeMatcher, IsTrueMatcher, IsFalseMatcher, NoneMatcher, InstanceOfMatcher
+from pyassert.object_matchers import EqualsMatcher, IsTypeMatcher, IsTrueMatcher, IsFalseMatcher, NoneMatcher,\
+    InstanceOfMatcher, IsMatcher
+
+class IsMatcherTest(unittest.TestCase):
+    def test_matches_should_return_true_when_objects_are_identical(self):
+        first = []
+        second = first
+
+        self.assertTrue(IsMatcher(first).matches(second))
+
+    def test_matches_should_return_false_when_objects_are_not_identical(self):
+        first = []
+        second = []
+
+        self.assertFalse(IsMatcher(first).matches(second))
+
+    def test_describe(self):
+        self.assertEquals("Actual '[]' is not '[]'", IsMatcher([]).describe([]))
+
 
 class EqualsMatcherTest(unittest.TestCase):
     def test_matches_should_return_true_when_values_are_equal(self):
@@ -65,6 +83,9 @@ class IsTrueMatcherTest(unittest.TestCase):
     def test_should_return_false_when_matching_non_empty_string(self):
         self.assertFalse(IsTrueMatcher().matches(None))
 
+    def test_describe(self):
+        self.assertEquals("Actual '[]' is not True", IsTrueMatcher().describe([]))
+
 
 class IsFalseMatcherTest(unittest.TestCase):
     def test_should_return_false_when_matching_true(self):
@@ -79,6 +100,9 @@ class IsFalseMatcherTest(unittest.TestCase):
     def test_should_return_true_when_matching_non_empty_string(self):
         self.assertTrue(IsFalseMatcher().matches(None))
 
+    def test_describe(self):
+        self.assertEquals("Actual '[]' is not False", IsFalseMatcher().describe([]))
+
 
 class IsNoneMatcherTest(unittest.TestCase):
     def test_should_return_true_when_matching_None(self):
@@ -87,12 +111,15 @@ class IsNoneMatcherTest(unittest.TestCase):
     def test_should_return_false_when_matching_string(self):
         self.assertFalse(NoneMatcher().matches(""))
 
+    def test_describe(self):
+        self.assertEquals("Actual '[]' is not None", NoneMatcher().describe([]))
 
-class InstanceOfMatcherTest (unittest.TestCase):
-    def test_should_match_value_when_class_matches (self):
+
+class InstanceOfMatcherTest(unittest.TestCase):
+    def test_should_match_value_when_class_matches(self):
         self.assertTrue(InstanceOfMatcher(list).matches([1, 2, 3]))
 
-    def test_should_not_match_value_when_class_does_not_match (self):
+    def test_should_not_match_value_when_class_does_not_match(self):
         self.assertFalse(InstanceOfMatcher(list).matches("asd"))
 
     def test_should_build_description(self):

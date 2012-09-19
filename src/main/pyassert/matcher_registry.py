@@ -1,5 +1,7 @@
 from __future__ import print_function
 
+import sys
+
 __author__ = "Alexander Metzner"
 
 __all__ = [
@@ -69,7 +71,7 @@ def register_matcher (name):
     return do_register
 
 
-def document_matchers (out=None):
+def document_matchers (out=sys.stdout):
     matchers = MatcherRegistry.instance().list_matchers()
     result = ""
     for matcher in matchers:
@@ -77,7 +79,4 @@ def document_matchers (out=None):
         for doc_string in matcher[1]:
             result += "\t%s\n" % (doc_string if doc_string else "n/a")
     
-    if out is None:
-        print(result)
-    else:
-        out.write(result)
+    out.write(result)

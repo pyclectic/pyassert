@@ -2,6 +2,19 @@
 import unittest
 from pyassert import MatcherRegistry, Matcher, document_matchers
 
+class MatcherTest(unittest.TestCase):
+    def setUp(self):
+        self.matcher = Matcher()
+
+    def test_should_accept_everything (self):
+        self.assertTrue(self.matcher.accepts(None))
+
+    def test_should_match_nothing (self):
+        self.assertFalse(self.matcher.matches(None))
+
+    def test_describe (self):
+        self.assertEquals("A matcher did not match the actual value.", self.matcher.describe(None))
+
 class MatcherRegistryTest (unittest.TestCase):
     def setUp (self):
         unittest.TestCase.setUp(self)

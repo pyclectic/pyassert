@@ -27,7 +27,7 @@ class IsMatcher (BaseMatcher):
         return self._expected is actual
 
     def describe (self, actual):
-        return "'%s' is not '%s'" % (actual, self._expected)
+        return "Actual '%s' is not '%s'" % (actual, self._expected)
 
 @register_matcher("is_a")
 class IsTypeMatcher (BaseMatcher):
@@ -55,7 +55,7 @@ class IsTrueMatcher (Matcher):
         return bool(actual)
 
     def describe(self, actual):
-        return "Expected '%s' to be true" % actual
+        return "Actual '%s' is not True" % actual
 
 
 @register_matcher("is_false")
@@ -64,7 +64,7 @@ class IsFalseMatcher (Matcher):
         return not bool(actual)
 
     def describe(self, actual):
-        return "Expected '%s' to be false" % actual
+        return "Actual '%s' is not False" % actual
 
 
 @register_matcher("is_none")
@@ -73,7 +73,7 @@ class NoneMatcher (Matcher):
         return actual is None
 
     def describe(self, actual):
-        return "Expected '%s' to be none" % actual
+        return "Actual '%s' is not None" % actual
 
 
 @register_matcher("is_instance_of")

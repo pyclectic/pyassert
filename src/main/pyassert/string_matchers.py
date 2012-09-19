@@ -34,7 +34,7 @@ class ContainsMatcher (StringMatcherWithArgument):
         return self._expected in actual
 
     def describe (self, actual):
-        return "'%s' does not contain '%s'" % (actual, self._expected)
+        return "Actual '%s' does not contain '%s'" % (actual, self._expected)
 
 
 @register_matcher("matches")
@@ -48,7 +48,7 @@ class MatchesMatcher (StringMatcherWithArgument):
         return True if self._pattern.match(actual) else False
 
     def describe (self, actual):
-        return "'%s' does not match '%s'" % (actual, self._expected)
+        return "Actual '%s' does not match '%s'" % (actual, self._expected)
 
 
 @register_matcher("starts_with")
@@ -58,7 +58,7 @@ class StartsWithMatcher (StringMatcherWithArgument):
         return actual.startswith(self._expected)
 
     def describe (self, actual):
-        return "'%s' does not start with '%s'" % (actual, self._expected)
+        return "Actual '%s' does not start with '%s'" % (actual, self._expected)
 
 
 @register_matcher("ends_with")
@@ -68,4 +68,4 @@ class EndsWithMatcher (StringMatcherWithArgument):
         return actual.endswith(self._expected)
 
     def describe (self, actual):
-        return "'%s' does not end with '%s'" % (actual, self._expected)
+        return "Actual '%s' does not end with '%s'" % (actual, self._expected)
