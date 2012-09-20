@@ -85,3 +85,24 @@ class MatcherAccepanceTest(unittest.TestCase):
 
     def test_is_less_than(self):
         assert_that(1).is_less_than(2)
+
+    def test_is_less_or_equal_than(self):
+        assert_that(1).is_less_or_equal_than(1)
+
+    def test_is_greater_than(self):
+        assert_that(2).is_greater_than(1)
+
+    def test_is_greater_or_equal_than(self):
+        assert_that(1).is_greater_or_equal_than(1)
+
+    def test_lt(self):
+        assert_that(1).lt(2)
+
+    def test_le(self):
+        assert_that(1).le(1)
+
+    def test_gt(self):
+        assert_that(2).gt(1)
+
+    def test_ge(self):
+        assert_that(1).ge(1)

@@ -1,3 +1,29 @@
+"""
+pyassert is an assertion library for the Python programming language.
+
+Introduction
+------------
+
+Assertions are used in automated tests to verify that a given piece of code behaves as expected. pyassert aims to provide assertions with provide
+
+* **rich functionality**: common assertions should be expressed easily
+* **good readability**: assertions should be easy to read and easy to understand to enhance the overall understandability of the test
+* **independent of the test framework**: pyassert assertions work with every Python test environment.
+
+How to install it?
+``````````````````
+
+pyassert is available via the [Cheeseshop](http://pypi.python.org/pypi/pyassert/) so you can use easy_install or pip:
+
+    $ pip install pyassert
+
+
+Links
+`````
+
+* pyassert Github repository including documentation <https://github.com/pyclectic/pyassert>
+"""
+
 from pythonbuilder.core import init, use_plugin, Author
 
 use_plugin("filter_resources")
@@ -13,15 +39,9 @@ use_plugin("python.pydev")
 
 default_task = ["analyze", "publish"]
 
-version = "0.2.3"
+version = "0.2.4"
 summary = "Rich assertions library for Python"
-description = """
-pyassert is an assertion library for the Python programming language. pyassert aims to provide assertions with provide
-
-* rich functionality: common assertions should be expressed easily
-* good readability: assertions should be easy to read and easy to understand to enhance the overall understandability of the test
-* independent of the test framework: pyassert assertions work with every Python test environment.
-"""
+description = __doc__
 authors = (Author("Alexander Metzner", "halimath.wilanthaou@gmail.com"),
            Author("Michael Gruber", "aelgru@gmail.com"))
 url = "https://github.com/pyclectic/pyassert"

@@ -46,17 +46,37 @@ readable message in case the expectations are not met.
 The following matcher are provided by pyassert.
 
 #### Common Matchers
-* equals
-* is_identical_to
+* `is_equal_to`/ ~~`equals`~~ - Asserts that two objects are equal (using `==`)
+* `is_identical_to` - Asserts that two objects are identical (using `is`)
+* `is_none` - Asserts that an object is `None`
 
 #### String Matchers
-* contains
-* matches
-* ends_with
-* starts_with
+* `contains` - Asserts that the actual string contains an expected string
+* `ends_with` - Asserts that the actual string ends with an expected string
+* `is_empty` - Asserts that the actual string is empty
+* `is_not_empty` - Asserts that the actual string is not empty
+* `matches` - Asserts that the actual string matches the expected regular expression
+* `starts_with` - Asserts that actual string starts with the expected string
 
 #### List/ Tuple Matchers
-* contains
+* `contains` - Asserts that actual list/ tuple contains the expected elements.
+* `is_empty` - Asserts that actual list/ tuple is empty
+* `is_not_empty` - Asserts that actual list/ tuple is not empty
+
+#### Boolean Matchers
+* `is_true` - Asserts that the actual object is `True`
+* `is_false` - Asserts that the actual object is `False`
+
+#### Type Matchers
+* `is_instance_of` - Asserts that the actual object is an instance of the expected type
+* `is_a` - Asserts that the actual object is of the actual type
+
+#### Number Matchers
+* `is_less_than`/ `lt` - Asserts that the actual number is less than the expected number
+* `is_less_or_equal_than`/ `le` - Asserts that the actual number is less or equal than the expected number
+* `is_greater_than`/ `gt` - Asserts that the actual number is greater than the expected number
+* `is_greater_or_equal_than`/ `ge` - Asserts that the actual number is greater or equal than the expected number
+
 
 ## How to extend it?
 
@@ -83,9 +103,10 @@ a class decorator register_matcher providing the name of the matcher
 
 
 ```python
+from pyassert import Matcher, register_matcher
 
 @register_matcher("matches_my_matcher")
-class MyMatcher (matcher):
+class MyMatcher (Matcher):
     ...
 ```
 
@@ -99,6 +120,20 @@ assert_that(actual).matches_my_matcher(...)
 All arguments that are passed to the matches_my_matcher function call are passed to the constructor of MyMatcher that is used by this assertion.
 
 ## Release Notes
+
+### Version 0.2.4 released 2012-09-20
+* Added number matchers
+* Added `is_instance_of` matcher
+* Added `is_equal_to` as alias to `equals` which is now deprecated
+* Hosting project as part of the *pyclectic* organisation
+
+### Version 0.2.3 released 2012-09-11
+* Added `is_true` matcher
+* Added `is_false` matcher
+
+### Version 0.2.2 released 2012-08-29
+* Added `is_none` matcher
+
 ### Version 0.2.1 released 2012-08-28
-* Added a is_a matcher that assert that actual values are of an expected type
+* Added `is_a matcher` that assert that actual values are of an expected type
 * pyassert is now compatible with Python 3 (see [Travis Build](http://travis-ci.org/#!/halimath/pyassert))

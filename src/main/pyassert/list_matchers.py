@@ -60,7 +60,7 @@ class AllContainsMatcher(ListOrTupleMatcher):
 
     def describe(self, actual):
         return "Actual '%s' does not contain all elements of '%s'" % (actual,
-                                                               ", ".join(self.expected))
+                                                                      ", ".join(self.expected))
 
 
 def all(*expected_values):

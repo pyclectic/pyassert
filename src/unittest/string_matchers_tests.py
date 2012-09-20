@@ -77,7 +77,7 @@ class EndsWithMatcherTests(unittest.TestCase):
     def test_should_match_empty_string(self):
         self.assertTrue(EndsWithMatcher('').matches('spam'))
 
-    def test_describe (self):
+    def test_describe(self):
         self.assertEquals("Actual 'spam' does not end with 'eggs'", EndsWithMatcher("eggs").describe("spam"))
 
 
@@ -103,5 +103,5 @@ class MatchesMatcherTests(unittest.TestCase):
     def test_should_match_wildcard_string(self):
         self.assertTrue(MatchesMatcher('.{4}').matches('spam'))
 
-    def test_describe (self):
+    def test_describe(self):
         self.assertEquals("Actual 'spam' does not match 'eggs'", MatchesMatcher("eggs").describe("spam"))

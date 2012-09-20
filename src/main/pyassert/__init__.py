@@ -1,3 +1,10 @@
+"""
+pyassert is a library for rich assertions. All assertions use the central assert_that entry point and can use
+built in and custom matchers:
+
+  assert_that('spam').contains('pa').and_ends_with('am')
+
+"""
 
 from .assertionhandler import *
 from .matcher_registry import *
