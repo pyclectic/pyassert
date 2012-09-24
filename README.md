@@ -46,29 +46,27 @@ readable message in case the expectations are not met.
 The following matcher are provided by pyassert.
 
 #### Common Matchers
-* `is_equal_to`/ ~~`equals`~~ - Asserts that two objects are equal (using `==`)
-* `is_identical_to` - Asserts that two objects are identical (using `is`)
-* `is_none` - Asserts that an object is `None`
+* `is_equal_to`/ `equals`/ `is_not_equal_to` - Asserts that two objects are (not) equal (using `==`)
+* `is_identical_to`/ `is_not_identical_to` - Asserts that two objects are (not) identical (using `is`)
+* `is_none`/ `is_not_none` - Asserts that an object is (not) `None`
 
 #### String Matchers
-* `contains` - Asserts that the actual string contains an expected string
-* `ends_with` - Asserts that the actual string ends with an expected string
-* `is_empty` - Asserts that the actual string is empty
-* `is_not_empty` - Asserts that the actual string is not empty
-* `matches` - Asserts that the actual string matches the expected regular expression
-* `starts_with` - Asserts that actual string starts with the expected string
+* `contains`/ `does_not_contain` - Asserts that the actual string contains an expected string
+* `ends_with`/ `does_not_end_with` - Asserts that the actual string ends with an expected string
+* `is_empty`/ `is_not_empty` - Asserts that the actual string is empty
+* `matches`/ `does_not_match` - Asserts that the actual string matches the expected regular expression
+* `starts_with`/ `does_not_start_with` - Asserts that actual string starts with the expected string
 
 #### List/ Tuple Matchers
-* `contains` - Asserts that actual list/ tuple contains the expected elements.
-* `is_empty` - Asserts that actual list/ tuple is empty
-* `is_not_empty` - Asserts that actual list/ tuple is not empty
+* `contains`/ `does_not_contain` - Asserts that actual list/ tuple contains the expected elements.
+* `is_empty`/ `is_not_empty?` - Asserts that actual list/ tuple is empty
 
 #### Boolean Matchers
 * `is_true` - Asserts that the actual object is `True`
 * `is_false` - Asserts that the actual object is `False`
 
 #### Type Matchers
-* `is_instance_of` - Asserts that the actual object is an instance of the expected type
+* `is_instance_of`/ `is_an_instance_of`/ `is_not_an_instance_of` - Asserts that the actual object is an instance of the expected type
 * `is_a` - Asserts that the actual object is of the actual type
 
 #### Number Matchers
@@ -117,9 +115,45 @@ Now your matcher is available using
 assert_that(actual).matches_my_matcher(...)
 ```
 
-All arguments that are passed to the matches_my_matcher function call are passed to the constructor of MyMatcher that is used by this assertion.
+All arguments that are passed to the matches_my_matcher function call are passed to the constructor of MyMatcher that is
+used by this assertion.
+
+### Negated Matchers
+
+If you have a matcher that should also be available in a negated manner (such as `contains` and `does_not_contain`) you
+can register the matcher twice but set the second one to negated:
+
+```python
+from pyassert import Matcher, register_matcher
+
+@register_matcher("matches_my_matcher")
+@register_matcher("does_not_match_my_matcher", negated=True)
+class MyMatcher (Matcher):
+    ...
+```
+
+If you also want to provide a custom message that describes the failed, negated state, you can additionally override
+the `describe_negated` method in your matcher class. See this example
+
+```python
+@register_matcher("is_empty")
+@register_negated_matcher("is_not_empty")
+class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
+    def matches(self, actual):
+        return len(actual) == 0
+
+    def describe(self, actual):
+        return "'%s' is not empty" % actual
+
+    def describe_negated(self, actual):
+        return "'%s' is empty" % actual
+
+```
 
 ## Release Notes
+
+### Version 0.2.5 released 2012-09-24
+* Negated matchers
 
 ### Version 0.2.4 released 2012-09-20
 * Added number matchers

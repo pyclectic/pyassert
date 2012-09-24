@@ -35,8 +35,14 @@ class MatcherAccepanceTest(unittest.TestCase):
     def test_is_equal_to(self):
         assert_that("spam").is_equal_to("spam")
 
+    def test_is_not_equal_to(self):
+        assert_that("spam").is_not_equal_to("eggs")
+
     def test_is_identical_to(self):
         assert_that(True).is_identical_to(True)
+
+    def test_is_not_identical_to(self):
+        assert_that(True).is_not_identical_to(False)
 
     def test_is_of_type(self):
         assert_that(7).is_a(int)
@@ -50,17 +56,29 @@ class MatcherAccepanceTest(unittest.TestCase):
     def test_is_none(self):
         assert_that(None).is_none()
 
+    def test_is_not_none(self):
+        assert_that("spam").is_not_none()
+
     def test_string_contains(self):
         assert_that("spam").contains("pa")
+
+    def test_string_does_not_contain(self):
+        assert_that("spam").does_not_contain("eggs")
 
     def test_matches(self):
         assert_that("spam").matches(".*pa.*")
 
+    def test_does_not_match(self):
+        assert_that("spam").does_not_match(".*e.*")
+
     def test_string_starts_with(self):
         assert_that("spam").starts_with("sp")
 
-    def test_string_ends_with(self):
-        assert_that("spam").ends_with("am")
+    def test_does_not_start_with(self):
+        assert_that("spam").does_not_start_with("eggs")
+
+    def test_does_not_end_with(self):
+        assert_that("spam").does_not_end_with("egg")
 
     def test_string_is_empty(self):
         assert_that('').is_empty()
@@ -82,6 +100,12 @@ class MatcherAccepanceTest(unittest.TestCase):
 
     def test_is_instance_of(self):
         assert_that([1, 2, 3]).is_instance_of(list)
+
+    def test_is_an_instance_of(self):
+        assert_that([1, 2, 3]).is_an_instance_of(list)
+
+    def test_is_not_an_instance_of(self):
+        assert_that([1, 2, 3]).is_not_an_instance_of(tuple)
 
     def test_is_less_than(self):
         assert_that(1).is_less_than(2)

@@ -11,6 +11,7 @@ class BaseMatcher(Matcher):
 
 @register_matcher("equals")
 @register_matcher("is_equal_to")
+@register_matcher("is_not_equal_to", negated=True)
 class EqualsMatcher(BaseMatcher):
     "Matcher that tests whether two object are equal, i.e. actual == expected"
 
@@ -23,6 +24,7 @@ class EqualsMatcher(BaseMatcher):
 
 
 @register_matcher("is_identical_to")
+@register_matcher("is_not_identical_to", negated=True)
 class IsMatcher(BaseMatcher):
     "Matcher that tests whether two objects are identical, i.e. actual is expected"
 
@@ -72,6 +74,7 @@ class IsFalseMatcher(Matcher):
 
 
 @register_matcher("is_none")
+@register_matcher("is_not_none", negated=True)
 class NoneMatcher(Matcher):
     def matches(self, actual):
         return actual is None
@@ -81,6 +84,8 @@ class NoneMatcher(Matcher):
 
 
 @register_matcher("is_instance_of")
+@register_matcher("is_an_instance_of")
+@register_matcher("is_not_an_instance_of", negated=True)
 class InstanceOfMatcher(BaseMatcher):
     def matches(self, actual):
         return isinstance(actual, self._expected)

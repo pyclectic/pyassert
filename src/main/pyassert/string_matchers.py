@@ -30,6 +30,7 @@ class StringMatcherWithArgument(StringMatcher):
 
 
 @register_matcher("contains")
+@register_matcher("does_not_contain", negated=True)
 class ContainsMatcher(StringMatcherWithArgument):
     "Tests whether the actual string contains the expected string."
 
@@ -41,6 +42,7 @@ class ContainsMatcher(StringMatcherWithArgument):
 
 
 @register_matcher("matches")
+@register_matcher("does_not_match", negated=True)
 class MatchesMatcher(StringMatcherWithArgument):
     "Tests whether the actual string matches the expected regular expression."
 
@@ -56,6 +58,7 @@ class MatchesMatcher(StringMatcherWithArgument):
 
 
 @register_matcher("starts_with")
+@register_matcher("does_not_start_with", negated=True)
 class StartsWithMatcher(StringMatcherWithArgument):
     "Tests whether the actual string starts with the expected string."
 
@@ -67,6 +70,7 @@ class StartsWithMatcher(StringMatcherWithArgument):
 
 
 @register_matcher("ends_with")
+@register_matcher("does_not_end_with", negated=True)
 class EndsWithMatcher(StringMatcherWithArgument):
     "Tests whether the actual string ends with the expected string."
 

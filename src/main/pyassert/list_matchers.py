@@ -5,7 +5,7 @@ Provides matcher implementations that deal with lists or tuples.
 __author__ = 'Alexander Metzner'
 
 from .string_matchers import StringMatcher
-from .matcher_registry import Matcher, register_matcher
+from .matcher_registry import Matcher, register_matcher, register_negated_matcher
 
 
 class ListOrTupleMatcher(Matcher):
@@ -97,6 +97,7 @@ class ContainsMatcher(ListOrTupleMatcher):
 
 
 @register_matcher("is_empty")
+@register_negated_matcher("is_not_empty")
 class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
     def accepts(self, actual):
         return ListOrTupleMatcher.accepts(self, actual) or StringMatcher.accepts(self, actual)
@@ -107,14 +108,5 @@ class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
     def describe(self, actual):
         return "'%s' is not empty" % actual
 
-
-@register_matcher("is_not_empty")
-class IsNotEmptyMatcher(ListOrTupleMatcher, StringMatcher):
-    def accepts(self, actual):
-        return ListOrTupleMatcher.accepts(self, actual) or StringMatcher.accepts(self, actual)
-
-    def matches(self, actual):
-        return len(actual) != 0
-
-    def describe(self, actual):
+    def describe_negated(self, actual):
         return "'%s' is empty" % actual

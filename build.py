@@ -39,7 +39,7 @@ use_plugin("python.pydev")
 
 default_task = ["analyze", "publish"]
 
-version = "0.2.4"
+version = "0.2.5"
 summary = "Rich assertions library for Python"
 description = __doc__
 authors = (Author("Alexander Metzner", "halimath.wilanthaou@gmail.com"),
@@ -50,7 +50,8 @@ license = "Apache Software License"
 @init
 def init (project):
     project.build_depends_on("coverage")
-    
+    project.build_depends_on("mockito")
+
     project.get_property("filter_resources_glob").append("**/pyassert/__init__.py")
 
     project.set_property("dir_source_main_python", "src/main")

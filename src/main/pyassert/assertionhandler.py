@@ -29,8 +29,8 @@ class AssertionHandler(object):
         return self
 
     def __call__(self, *arguments, **keywordArguments):
-        for matcher_class in self._matcher_classes:
-            matcher = matcher_class(*arguments, **keywordArguments)
+        for matcher_factory in self._matcher_classes:
+            matcher = matcher_factory(*arguments, **keywordArguments)
 
             if matcher.accepts(self._actual):
                 if not matcher.matches(self._actual):
@@ -43,7 +43,7 @@ class AssertionHandler(object):
 
     def _filter_matcher_name(self, name):
         if name.startswith("and_"):
-            if self._matches == 0:
+            if not self._matches:
                 raise InvalidUsageException(name)
             return name[4:]
         return name
