@@ -13,6 +13,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+import os
+import shutil
+import tempfile
 import unittest
 
 from pyassert import *
@@ -157,3 +160,38 @@ class MatcherAccepanceTest(unittest.TestCase):
             raise TypeError()
 
         assert_that(closure).does_not_raise(ValueError)
+
+    def test_is_a_directory (self):
+        temp_dir = tempfile.mkdtemp()
+        try:
+            assert_that(temp_dir).is_a_directory()
+        finally:
+            shutil.rmtree(temp_dir)
+
+    def test_is_not_a_directory (self):
+        assert_that("spam/eggs").is_not_a_directory()
+
+    def test_is_a_file (self):
+        temp_dir = tempfile.mkdtemp()
+        filename = os.path.join(temp_dir, "file")
+        with open(filename, "w") as temp_file:
+            temp_file.write("x")
+
+        try:
+            assert_that(filename).is_a_file()
+        finally:
+            shutil.rmtree(temp_dir)
+
+    def test_is_not_a_file(self):
+        assert_that("spam/eggs").is_not_a_file()
+
+    def test_has_file_length_of (self):
+        temp_dir = tempfile.mkdtemp()
+        filename = os.path.join(temp_dir, "file")
+        with open(filename, "w") as temp_file:
+            temp_file.write("x")
+
+        try:
+            assert_that(filename).has_file_length_of(1)
+        finally:
+            shutil.rmtree(temp_dir)
