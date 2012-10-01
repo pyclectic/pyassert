@@ -54,7 +54,7 @@ use_plugin("python.pydev")
 
 default_task = ["analyze", "publish"]
 
-version = "0.2.5"
+version = "0.3.1"
 summary = "Rich assertions library for Python"
 description = __doc__
 authors = (Author("Alexander Metzner", "halimath.wilanthaou@gmail.com"),
@@ -65,7 +65,7 @@ license = "Apache Software License"
 @init
 def init (project):
     project.depends_on("six")
-    
+
     project.build_depends_on("coverage")
     project.build_depends_on("mockito")
 

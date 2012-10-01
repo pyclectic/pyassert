@@ -49,6 +49,7 @@ The following matcher are provided by pyassert.
 * `is_equal_to`/ `equals`/ `is_not_equal_to` - Asserts that two objects are (not) equal (using `==`)
 * `is_identical_to`/ `is_not_identical_to` - Asserts that two objects are (not) identical (using `is`)
 * `is_none`/ `is_not_none` - Asserts that an object is (not) `None`
+* `raises`/ `does_not_raise` - Asserts that a given callable raises/ does not raise an expected exception
 
 #### String Matchers
 * `contains`/ `does_not_contain` - Asserts that the actual string contains an expected string
@@ -75,6 +76,10 @@ The following matcher are provided by pyassert.
 * `is_greater_than`/ `gt` - Asserts that the actual number is greater than the expected number
 * `is_greater_or_equal_than`/ `ge` - Asserts that the actual number is greater or equal than the expected number
 
+#### Filesystem Matchers
+* `is_a_directory`/ `is_not_a_directory` - Asserts that a given string names an existing directory
+* `is_a_file`/ `is_not_a_file` - Asserts that a given string names an existing file
+* `has_file_length_of` - Asserts that a given string names an existing file with an expected file length in bytes
 
 ## How to extend it?
 
@@ -151,6 +156,11 @@ class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
 ```
 
 ## Release Notes
+
+### Version 0.3.1 released 2012-10-01
+* Added `raises`/ `does_not_raise` matcher
+* Added filesystem matchers
+* Using [six](http://pypi.python.org/pypi/six/) to provide compatibiliy with Python 3
 
 ### Version 0.2.5 released 2012-09-24
 * Negated matchers
