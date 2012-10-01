@@ -28,6 +28,7 @@ from .string_matchers import *
 from .object_matchers import *
 from .list_matchers import *
 from .number_matchers import *
+from .exception_matchers import *
 
 __author__ = "Alexander Metzner, Michael Gruber"
 

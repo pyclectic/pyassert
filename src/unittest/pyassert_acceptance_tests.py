@@ -145,3 +145,15 @@ class MatcherAccepanceTest(unittest.TestCase):
 
     def test_ge(self):
         assert_that(1).ge(1)
+
+    def test_raises (self):
+        def closure():
+            raise ValueError()
+
+        assert_that(closure).raises(ValueError)
+
+    def test_does_not_raise (self):
+        def closure():
+            raise TypeError()
+
+        assert_that(closure).does_not_raise(ValueError)
