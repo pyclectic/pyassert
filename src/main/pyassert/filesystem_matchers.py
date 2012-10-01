@@ -16,14 +16,16 @@
 __author__ = "Alexander Metzner"
 
 import os
+import six
 
 from .matcher_registry import Matcher, register_matcher
+
 
 @register_matcher("is_a_directory")
 @register_matcher("is_not_a_directory", negated=True)
 class DirectoryExistsMatcher(Matcher):
     def accepts(self, actual):
-        return isinstance(actual, basestring)
+        return isinstance(actual, six.string_types)
 
     def matches(self, actual):
         return os.path.exists(actual) and os.path.isdir(actual)
@@ -39,7 +41,7 @@ class DirectoryExistsMatcher(Matcher):
 @register_matcher("is_not_a_file", negated=True)
 class FileExistsMatcher(Matcher):
     def accepts(self, actual):
-        return isinstance(actual, basestring)
+        return isinstance(actual, six.string_types)
 
     def matches(self, actual):
         return os.path.exists(actual) and os.path.isfile(actual)

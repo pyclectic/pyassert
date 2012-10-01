@@ -15,6 +15,7 @@
 
 import types
 import re
+import six
 
 from .matcher_registry import Matcher, register_matcher
 
@@ -24,17 +25,11 @@ __all__ = [
     "ContainsMatcher"
 ]
 
-# Python 3 compatibility
-try:
-    unicode
-except NameError:
-    basestring = unicode = str
-
 class StringMatcher(Matcher):
     "Base class for matchers accepting string values."
 
     def accepts(self, actual):
-        return isinstance(actual, basestring)
+        return isinstance(actual, six.string_types)
 
 
 class StringMatcherWithArgument(StringMatcher):

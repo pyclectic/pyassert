@@ -64,6 +64,8 @@ license = "Apache Software License"
 
 @init
 def init (project):
+    project.depends_on("six")
+    
     project.build_depends_on("coverage")
     project.build_depends_on("mockito")
 
