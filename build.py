@@ -71,8 +71,6 @@ def init (project):
 
     project.get_property("filter_resources_glob").append("**/pyassert/__init__.py")
 
-    project.set_property("dir_source_main_python", "src/main")
-    project.set_property("dir_source_unittest_python", "src/unittest")
     project.set_property("pychecker_break_build", True)
     project.set_property("pychecker_break_build_threshold", 1)
     
