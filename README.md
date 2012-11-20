@@ -180,4 +180,4 @@ class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
 
 ### Version 0.2.1 released 2012-08-28
 * Added `is_a matcher` that assert that actual values are of an expected type
-* pyassert is now compatible with Python 3 (see [Travis Build](http://travis-ci.org/#!/halimath/pyassert))
+* pyassert is now compatible with Python 3 (see [Travis Build](http://travis-ci.org/#!/pyclectic/pyassert))
