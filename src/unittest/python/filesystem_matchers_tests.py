@@ -21,7 +21,7 @@ import tempfile
 import unittest
 
 from pyassert.filesystem_matchers import DirectoryExistsMatcher, FileExistsMatcher, FileLengthMatcher, \
-                                         FileContentMatcher
+                                         FileContentMatcher, EmptyFileMatcher
 
 class TempDirTestBase(unittest.TestCase):
     def setUp(self):
@@ -133,6 +133,43 @@ class FileLengthMatcherTest(TempDirTestBase):
             FileLengthMatcher(1).describe("spam"))
 
 
+class EmptyFileMatcherTest(TempDirTestBase):
+    def test_should_accept_string(self):
+        self.assertTrue(EmptyFileMatcher().accepts("spam"))
+
+    def test_should_not_accept_non_string(self):
+        self.assertFalse(EmptyFileMatcher().accepts(None))
+
+    def test_should_not_match_existing_directory(self):
+        dir_name = os.path.join(self.basedir, "spam")
+        os.makedirs(dir_name)
+
+        self.assertFalse(EmptyFileMatcher().matches(dir_name))
+
+    def test_should_not_match_non_existing_file(self):
+        dir_name = os.path.join(self.basedir, "spam")
+        self.assertFalse(EmptyFileMatcher().matches(dir_name))
+
+    def test_should_match_existing_file_with_matching_length(self):
+        file_name = os.path.join(self.basedir, "spam")
+
+        with open(file_name, "w") as temp_file:
+            temp_file.write("")
+
+        self.assertTrue(EmptyFileMatcher().matches(file_name))
+
+    def test_should_not_match_existing_file_with_wrong_matching_length(self):
+        file_name = os.path.join(self.basedir, "spam")
+
+        with open(file_name, "w") as temp_file:
+            temp_file.write("x")
+
+        self.assertFalse(EmptyFileMatcher().matches(file_name))
+
+    def test_describe(self):
+        self.assertEquals("Actual file 'spam' is not empty.", EmptyFileMatcher().describe("spam"))
+
+
 class FileContentMatcherTest(TempDirTestBase):
     def test_should_accept_string(self):
         self.assertTrue(FileContentMatcher("").accepts("spam"))
@@ -175,6 +212,5 @@ class FileContentMatcherTest(TempDirTestBase):
         matcher = FileContentMatcher("Hello world.")
         matcher.matches(file_name)
 
-        self.assertEquals("Actual 'spam' has content 'Keep It Simple, Stupid.' but expected 'Hello world.'.",
+        self.assertEquals("Actual file 'spam' has content 'Keep It Simple, Stupid.' but expected 'Hello world.'.",
             matcher.describe("spam"))
-

@@ -75,6 +75,15 @@ class FileLengthMatcher(FileExistsMatcher):
         self._actual_size = os.stat(filename).st_size
 
 
+@register_matcher("is_a_empty_file")
+class EmptyFileMatcher(FileLengthMatcher):
+    def __init__(self):
+        self._expected_size = 0
+
+    def describe(self, actual):
+        return "Actual file '{0}' is not empty.".format(actual)
+
+
 @register_matcher("is_a_file_with_content")
 class FileContentMatcher(FileExistsMatcher):
     """matches a given file for the expected file content"""
@@ -93,5 +102,6 @@ class FileContentMatcher(FileExistsMatcher):
         return self._actual_content == self._expected_content
 
     def describe(self, actual_file_name):
-        return "Actual '{0}' has content '{1}' but expected '{2}'.".format(actual_file_name,
+        return "Actual file '{0}' has content '{1}' but expected '{2}'.".format(actual_file_name,
             self._actual_content, self._expected_content)
+
