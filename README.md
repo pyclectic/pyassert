@@ -80,6 +80,7 @@ The following matcher are provided by pyassert.
 * `is_a_directory`/ `is_not_a_directory` - Asserts that a given string names an existing directory
 * `is_a_file`/ `is_not_a_file` - Asserts that a given string names an existing file
 * `has_file_length_of` - Asserts that a given string names an existing file with an expected file length in bytes
+* `is_a_file_with_content` - Asserts that a given string names an existing file with the expected content
 
 ## How to extend it?
 
@@ -156,6 +157,9 @@ class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
 ```
 
 ## Release Notes
+
+### Version 0.3.2 (not released)
+* Added `is_a_file_with_content` matcher
 
 ### Version 0.3.1 released 2012-10-01
 * Added `raises`/ `does_not_raise` matcher
