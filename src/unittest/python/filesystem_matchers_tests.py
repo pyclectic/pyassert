@@ -166,7 +166,7 @@ class FileContentMatcherTest(TempDirTestBase):
 
         self.assertTrue(FileContentMatcher("Hello world.").matches(file_name))
 
-    def test_should_describe_when_file_as_unexpected_content(self):
+    def test_should_describe_error_when_file_has_unexpected_content(self):
         file_name = os.path.join(self.basedir, "spam")
 
         with open(file_name, "w") as temp_file:
@@ -175,6 +175,6 @@ class FileContentMatcherTest(TempDirTestBase):
         matcher = FileContentMatcher("Hello world.")
         matcher.matches(file_name)
 
-        self.assertEquals("Actual file 'spam' has content 'Keep It Simple, Stupid.' but expected 'Hello world.'.",
+        self.assertEquals("Actual 'spam' has content 'Keep It Simple, Stupid.' but expected 'Hello world.'.",
             matcher.describe("spam"))
 
