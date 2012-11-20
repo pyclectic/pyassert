@@ -20,7 +20,8 @@ import shutil
 import tempfile
 import unittest
 
-from pyassert.filesystem_matchers import DirectoryExistsMatcher, FileExistsMatcher, FileLengthMatcher
+from pyassert.filesystem_matchers import DirectoryExistsMatcher, FileExistsMatcher, FileLengthMatcher, \
+                                         FileContentMatcher
 
 class TempDirTestBase(unittest.TestCase):
     def setUp(self):
@@ -119,7 +120,7 @@ class FileLengthMatcherTest(TempDirTestBase):
 
         self.assertTrue(FileLengthMatcher(1).matches(file_name))
 
-    def test_should_match_existing_file_with_matching_length(self):
+    def test_should_not_match_existing_file_with_wrong_matching_length(self):
         file_name = os.path.join(self.basedir, "spam")
 
         with open(file_name, "w") as temp_file:
@@ -130,3 +131,50 @@ class FileLengthMatcherTest(TempDirTestBase):
     def test_describe(self):
         self.assertEquals("Actual 'spam' has a length of -1 bytes but expected 1 bytes.",
             FileLengthMatcher(1).describe("spam"))
+
+
+class FileContentMatcherTest(TempDirTestBase):
+    def test_should_accept_string(self):
+        self.assertTrue(FileContentMatcher("").accepts("spam"))
+
+    def test_should_not_accept_non_string(self):
+        self.assertFalse(FileContentMatcher("").accepts(None))
+
+    def test_should_not_match_existing_directory(self):
+        dir_name = os.path.join(self.basedir, "spam")
+        os.makedirs(dir_name)
+
+        self.assertFalse(FileContentMatcher("").matches(dir_name))
+
+    def test_should_not_match_non_existing_file(self):
+        dir_name = os.path.join(self.basedir, "spam")
+        self.assertFalse(FileContentMatcher("").matches(dir_name))
+
+    def test_should_not_match_file_with_wrong_content(self):
+        file_name = os.path.join(self.basedir, "spam")
+
+        with open(file_name, "w") as temp_file:
+            temp_file.write("Tell don't ask.")
+
+        self.assertFalse(FileContentMatcher("Hello world.").matches(file_name))
+
+    def test_should_match_file_with_matching_content(self):
+        file_name = os.path.join(self.basedir, "spam")
+
+        with open(file_name, "w") as temp_file:
+            temp_file.write("Hello world.")
+
+        self.assertTrue(FileContentMatcher("Hello world.").matches(file_name))
+
+    def test_should_describe_when_file_as_unexpected_content(self):
+        file_name = os.path.join(self.basedir, "spam")
+
+        with open(file_name, "w") as temp_file:
+            temp_file.write("Keep It Simple, Stupid.")
+
+        matcher = FileContentMatcher("Hello world.")
+        matcher.matches(file_name)
+
+        self.assertEquals("Actual file 'spam' has content 'Keep It Simple, Stupid.' but expected 'Hello world.'.",
+            matcher.describe("spam"))
+

@@ -73,3 +73,25 @@ class FileLengthMatcher(FileExistsMatcher):
 
     def _determine_file_size(self, filename):
         self._actual_size = os.stat(filename).st_size
+
+
+@register_matcher("is_a_file_with_content")
+class FileContentMatcher(FileExistsMatcher):
+    """matches a given file for the expected file content"""
+    def __init__(self, expected_content):
+        self._actual_content = None
+        self._expected_content = expected_content
+
+    def matches(self, actual_file_name):
+        """checks if the file with the given name has the expected content"""
+        if not FileExistsMatcher.matches(self, actual_file_name):
+            return False
+
+        with open(actual_file_name, "r") as actual_file:
+            self._actual_content = actual_file.read()
+
+        return self._actual_content == self._expected_content
+
+    def describe(self, actual_file_name):
+        return "Actual '{0}' has content '{1}' but expected '{2}'.".format(actual_file_name,
+            self._actual_content, self._expected_content)
