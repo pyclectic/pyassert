@@ -1,5 +1,5 @@
 
-#pyassert [![Build Status](https://secure.travis-ci.org/halimath/pyassert.png?branch=master)](http://travis-ci.org/halimath/pyassert)
+#pyassert [![Build Status](https://secure.travis-ci.org/pyclectic/pyassert.png?branch=master)](https://travis-ci.org/pyclectic/pyassert)
 
 pyassert is an assertion library for the Python programming language. 
 
