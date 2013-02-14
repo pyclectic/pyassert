@@ -158,7 +158,7 @@ class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
 
 ## Release Notes
 
-### Version 0.3.2 (not released)
+### Version 0.3.2 released 2013-02-14
 * Added `is_a_file_with_content` matcher
 * Added `is_a_empty_file` matcher
 
