@@ -71,7 +71,7 @@ def init (project):
 
     project.get_property("filter_resources_glob").append("**/pyassert/__init__.py")
 
-    project.set_property("pychecker_break_build", True)
+    project.set_property("pychecker_break_build", False)
     project.set_property("pychecker_break_build_threshold", 1)
     
     project.set_property("coverage_threshold_warn", 90)
