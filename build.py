@@ -54,7 +54,7 @@ use_plugin("python.pydev")
 
 default_task = ["analyze", "publish"]
 
-version = "0.3.2"
+version = "0.4.1"
 summary = "Rich assertions library for Python"
 description = __doc__
 authors = (Author("Alexander Metzner", "halimath.wilanthaou@gmail.com"),
