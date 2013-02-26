@@ -19,22 +19,21 @@ Provides matcher implementations that deal with lists or tuples.
 
 __author__ = 'Alexander Metzner'
 
+import collections
+
 from .string_matchers import StringMatcher
 from .matcher_registry import Matcher, register_matcher, register_negated_matcher
 
 
 class ListOrTupleMatcher(Matcher):
     """ Base class for matchers accepting lists or tuples. """
-    LIST_CLASS = [].__class__
-    TUPLE_CLASS = (1,).__class__
-
 
     def accepts(self, actual):
-        return actual.__class__ in [ListOrTupleMatcher.LIST_CLASS, ListOrTupleMatcher.TUPLE_CLASS]
+        return isinstance(actual, collections.Container)
 
 
 class AnyOfContainsMatcher(ListOrTupleMatcher):
-    """ 
+    """
     Supplementary matcher that matches when any of the expected values
     is contained in the actual collection.
     """
@@ -59,7 +58,7 @@ def any_of(*expected_values):
 
 
 class AllContainsMatcher(ListOrTupleMatcher):
-    """ 
+    """
     Supplementary matcher that matches when all of the expected values
     are contained in the actual collection.
     """
@@ -85,10 +84,10 @@ def all(*expected_values):
 
 @register_matcher("contains")
 class ContainsMatcher(ListOrTupleMatcher):
-    """ 
+    """
     Matcher that verifies that certain elements are contained in the given
     collection.
-    
+
     Examples:
     collection = [...]
 
