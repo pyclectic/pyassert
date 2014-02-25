@@ -39,7 +39,7 @@ Links
 * pyassert Github repository including documentation <https://github.com/pyclectic/pyassert>
 """
 
-from pythonbuilder.core import init, use_plugin, Author
+from pybuilder.core import init, use_plugin, Author
 
 use_plugin("filter_resources")
 
