@@ -17,7 +17,7 @@ __author__ = "Alexander Metzner"
 
 import unittest
 
-from pyassert.list_matchers import IsEmptyMatcher, AnyOfContainsMatcher, AllContainsMatcher
+from pyassert.list_matchers import IsEmptyMatcher, AnyOfContainsMatcher, AllContainsMatcher, ContainsMatcher
 
 
 class AnyOfContainsMatcherTest(unittest.TestCase):
@@ -67,3 +67,19 @@ class IsEmptyMatcherTest(unittest.TestCase):
 
     def test_describe_negated(self):
         self.assertEquals("'[]' is empty", IsEmptyMatcher().describe_negated([]))
+
+
+class ContainsMatcherTest(unittest.TestCase):
+    def test_matches_should_return_true_when_an_element_matches(self):
+        self.assertTrue(ContainsMatcher("spam").matches(["spam", "eggs"]))
+
+    def test_matches_should_return_false_when_no_element_matches(self):
+        self.assertFalse(ContainsMatcher("spam").matches(["foo", "bar"]))
+
+    def test_describe(self):
+        self.assertEquals("'['spam', 'eggs']' contains 'spam'",
+                          ContainsMatcher("spam").describe(["spam", "eggs"]))
+
+    def test_describe_negated(self):
+        self.assertEquals("'['foo', 'bar']' does not contain 'spam'",
+                          ContainsMatcher("spam").describe_negated(["foo", "bar"]))

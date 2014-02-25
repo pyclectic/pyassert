@@ -83,6 +83,7 @@ def all(*expected_values):
 
 
 @register_matcher("contains")
+@register_matcher("does_not_contain", negated=True)
 class ContainsMatcher(ListOrTupleMatcher):
     """
     Matcher that verifies that certain elements are contained in the given
@@ -107,6 +108,9 @@ class ContainsMatcher(ListOrTupleMatcher):
     def describe(self, actual):
         if isinstance(self.expected, Matcher):
             return self.expected.describe(actual)
+        return "'%s' contains '%s'" % (actual, self.expected)
+
+    def describe_negated(self, actual):
         return "'%s' does not contain '%s'" % (actual, self.expected)
 
 
