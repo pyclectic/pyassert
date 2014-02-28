@@ -108,10 +108,10 @@ class ContainsMatcher(ListOrTupleMatcher):
     def describe(self, actual):
         if isinstance(self.expected, Matcher):
             return self.expected.describe(actual)
-        return "'%s' contains '%s'" % (actual, self.expected)
+        return "'%s' does not contain '%s'" % (actual, self.expected)
 
     def describe_negated(self, actual):
-        return "'%s' does not contain '%s'" % (actual, self.expected)
+        return "'%s' contains '%s'" % (actual, self.expected)
 
 
 @register_matcher("is_empty")

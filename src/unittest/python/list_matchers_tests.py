@@ -77,9 +77,9 @@ class ContainsMatcherTest(unittest.TestCase):
         self.assertFalse(ContainsMatcher("spam").matches(["foo", "bar"]))
 
     def test_describe(self):
-        self.assertEquals("'['spam', 'eggs']' contains 'spam'",
-                          ContainsMatcher("spam").describe(["spam", "eggs"]))
+        self.assertEquals("'['spam', 'eggs']' does not contain 'foo'",
+                          ContainsMatcher("foo").describe(["spam", "eggs"]))
 
     def test_describe_negated(self):
-        self.assertEquals("'['foo', 'bar']' does not contain 'spam'",
-                          ContainsMatcher("spam").describe_negated(["foo", "bar"]))
+        self.assertEquals("'['foo', 'bar']' contains 'foo'",
+                          ContainsMatcher("foo").describe_negated(["foo", "bar"]))
