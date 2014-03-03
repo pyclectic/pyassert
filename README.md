@@ -1,6 +1,6 @@
 #pyassert [![Build Status](https://secure.travis-ci.org/pyclectic/pyassert.png?branch=master)](https://travis-ci.org/pyclectic/pyassert)
 
-pyassert is an assertion library for the Python programming language. 
+pyassert is an assertion library for the Python programming language.
 
 ##Introduction
 
@@ -157,6 +157,9 @@ class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
 ```
 
 ## Release Notes
+
+### Version 0.4.1 released 2013-02-13
+* Allow any collection in ListOrTupleMatcher (Pull-Request by @charlax, Charles-Axel Dein)
 
 ### Version 0.3.2 released 2013-02-14
 * Added `is_a_file_with_content` matcher
