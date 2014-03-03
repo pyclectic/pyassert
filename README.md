@@ -158,6 +158,10 @@ class IsEmptyMatcher(ListOrTupleMatcher, StringMatcher):
 
 ## Release Notes
 
+### Version 0.4.2 released 2014-03-03
+* Added `does_not_contain` matcher to ContainsMatcher (Pull-Request by @fraisse, Sylvain Fraïssé)
+* Enabled flake8 plugin
+
 ### Version 0.4.1 released 2013-02-13
 * Allow any collection in ListOrTupleMatcher (Pull-Request by @charlax, Charles-Axel Dein)
 
