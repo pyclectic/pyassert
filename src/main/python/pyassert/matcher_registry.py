@@ -15,8 +15,6 @@
 
 from __future__ import print_function
 
-import sys
-
 __author__ = "Alexander Metzner"
 
 __all__ = [
