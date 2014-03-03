@@ -47,6 +47,7 @@ use_plugin("python.core")
 use_plugin("python.unittest")
 use_plugin("python.coverage")
 use_plugin("python.pychecker")
+use_plugin("python.flake8")
 use_plugin("python.distutils")
 
 use_plugin("python.install_dependencies")
@@ -73,7 +74,7 @@ def init (project):
 
     project.set_property("pychecker_break_build", False)
     project.set_property("pychecker_break_build_threshold", 1)
-    
+
     project.set_property("coverage_threshold_warn", 90)
     project.set_property("coverage_break_build", True)
 
