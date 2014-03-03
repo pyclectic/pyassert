@@ -65,11 +65,12 @@ class FileLengthMatcher(FileExistsMatcher):
 
         self._determine_file_size(actual)
 
-        return  int(self._actual_size) == int(self._expected_size)
+        return int(self._actual_size) == int(self._expected_size)
 
     def describe(self, actual):
         return "Actual '{0}' has a length of {1:d} bytes but expected {2:d} bytes.".format(actual,
-            self._actual_size, self._expected_size)
+                                                                                           self._actual_size,
+                                                                                           self._expected_size)
 
     def _determine_file_size(self, filename):
         self._actual_size = os.stat(filename).st_size
@@ -103,5 +104,5 @@ class FileContentMatcher(FileExistsMatcher):
 
     def describe(self, actual_file_name):
         return "Actual file '{0}' has content '{1}' but expected '{2}'.".format(actual_file_name,
-            self._actual_content, self._expected_content)
-
+                                                                                self._actual_content,
+                                                                                self._expected_content)

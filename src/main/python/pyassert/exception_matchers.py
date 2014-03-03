@@ -19,6 +19,7 @@ import sys
 
 from .matcher_registry import Matcher, register_matcher
 
+
 @register_matcher("raises")
 @register_matcher("does_not_raise", negated=True)
 class RaisesMatcher(Matcher):
@@ -37,11 +38,9 @@ class RaisesMatcher(Matcher):
         return self._actual_exception_type == self._expected_exception_type
 
     def describe(self, actual):
-        return "Expected '{0}' to raise exception of type {1} but instead caught {2}".format(actual,
-            self._expected_exception_type.__name__, self._actual_exception_type.__name__)
+        return "Expected '{0}' to raise exception of type {1} but instead caught {2}".format(
+            actual, self._expected_exception_type.__name__, self._actual_exception_type.__name__)
 
     def describe_negated(self, actual):
         return "Expected '{0}' not to raise exception of type {1}".format(actual,
-            self._expected_exception_type.__name__)
-
-
+                                                                          self._expected_exception_type.__name__)

@@ -17,8 +17,9 @@ from .matcher_registry import Matcher, register_matcher
 
 __author__ = "Alexander Metzner"
 
+
 class BaseMatcher(Matcher):
-    "Base class for matchers that have a single expected value."
+    """Base class for matchers that have a single expected value."""
 
     def __init__(self, expected):
         self._expected = expected
@@ -28,7 +29,7 @@ class BaseMatcher(Matcher):
 @register_matcher("is_equal_to")
 @register_matcher("is_not_equal_to", negated=True)
 class EqualsMatcher(BaseMatcher):
-    "Matcher that tests whether two object are equal, i.e. actual == expected"
+    """Matcher that tests whether two object are equal, i.e. actual == expected"""
 
     def matches(self, actual):
         return self._expected == actual
@@ -41,7 +42,7 @@ class EqualsMatcher(BaseMatcher):
 @register_matcher("is_identical_to")
 @register_matcher("is_not_identical_to", negated=True)
 class IsMatcher(BaseMatcher):
-    "Matcher that tests whether two objects are identical, i.e. actual is expected"
+    """Matcher that tests whether two objects are identical, i.e. actual is expected"""
 
     def matches(self, actual):
         return self._expected is actual
@@ -54,9 +55,9 @@ class IsMatcher(BaseMatcher):
 class IsTypeMatcher(BaseMatcher):
     """
     Matcher that tests whether the actual value is of a given type.
-    
+
     Examples
-    
+
     assert_that(7).is_a(int)
     assert_that(7.2).is_a(float)
     """
@@ -107,5 +108,3 @@ class InstanceOfMatcher(BaseMatcher):
 
     def describe(self, actual):
         return "Actual '%s' is not an instance of %s" % (actual, self._expected.__name__)
-
-

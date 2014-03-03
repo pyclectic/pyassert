@@ -26,6 +26,7 @@ __all__ = [
     "register_negated_matcher"
 ]
 
+
 class Matcher(object):
     """
     Interface class for matcher objects. Matcher objects are used to accept and match expected with actual values
@@ -62,7 +63,6 @@ class NegatedMatcherDecorator(Matcher):
     def accepts(self, actual):
         return self._target_matcher.accepts(actual)
 
-
     def matches(self, actual):
         return not self._target_matcher.matches(actual)
 
@@ -71,7 +71,7 @@ class NegatedMatcherDecorator(Matcher):
 
 
 class NoSuchMatcherException(Exception):
-    "to be thrown when no matcher with a given name was found"
+    """to be thrown when no matcher with a given name was found"""
 
     def __init__(self, name):
         super(NoSuchMatcherException, self).__init__("No such matcher: %s" % name)

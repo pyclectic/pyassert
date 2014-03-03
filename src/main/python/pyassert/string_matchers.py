@@ -13,7 +13,6 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-import types
 import re
 import six
 
@@ -25,15 +24,16 @@ __all__ = [
     "ContainsMatcher"
 ]
 
+
 class StringMatcher(Matcher):
-    "Base class for matchers accepting string values."
+    """Base class for matchers accepting string values."""
 
     def accepts(self, actual):
         return isinstance(actual, six.string_types)
 
 
 class StringMatcherWithArgument(StringMatcher):
-    "Base class for matchers accepting string values and requiring additional expected parameter"
+    """Base class for matchers accepting string values and requiring additional expected parameter"""
 
     def __init__(self, expected):
         self._expected = expected
@@ -42,7 +42,7 @@ class StringMatcherWithArgument(StringMatcher):
 @register_matcher("contains")
 @register_matcher("does_not_contain", negated=True)
 class ContainsMatcher(StringMatcherWithArgument):
-    "Tests whether the actual string contains the expected string."
+    """Tests whether the actual string contains the expected string."""
 
     def matches(self, actual):
         return self._expected in actual
@@ -54,7 +54,7 @@ class ContainsMatcher(StringMatcherWithArgument):
 @register_matcher("matches")
 @register_matcher("does_not_match", negated=True)
 class MatchesMatcher(StringMatcherWithArgument):
-    "Tests whether the actual string matches the expected regular expression."
+    """Tests whether the actual string matches the expected regular expression."""
 
     def __init__(self, expected):
         StringMatcherWithArgument.__init__(self, expected)
@@ -70,7 +70,7 @@ class MatchesMatcher(StringMatcherWithArgument):
 @register_matcher("starts_with")
 @register_matcher("does_not_start_with", negated=True)
 class StartsWithMatcher(StringMatcherWithArgument):
-    "Tests whether the actual string starts with the expected string."
+    """Tests whether the actual string starts with the expected string."""
 
     def matches(self, actual):
         return actual.startswith(self._expected)
@@ -82,7 +82,7 @@ class StartsWithMatcher(StringMatcherWithArgument):
 @register_matcher("ends_with")
 @register_matcher("does_not_end_with", negated=True)
 class EndsWithMatcher(StringMatcherWithArgument):
-    "Tests whether the actual string ends with the expected string."
+    """Tests whether the actual string ends with the expected string."""
 
     def matches(self, actual):
         return actual.endswith(self._expected)

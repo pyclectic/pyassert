@@ -23,6 +23,7 @@ __all__ = [
 
 from .matcher_registry import MatcherRegistry
 
+
 class InvalidUsageException(Exception):
     def __init__(self, name):
         self._message = "Must not use 'and_' as first matcher: '%s'" % name

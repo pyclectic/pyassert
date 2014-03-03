@@ -17,6 +17,7 @@ __author__ = "Alexander Metzner"
 
 from .matcher_registry import Matcher, register_matcher
 
+
 class BaseNumberMatcher(Matcher):
     def __init__(self, expected):
         self._expected = expected
